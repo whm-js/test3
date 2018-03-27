@@ -1,0 +1,8 @@
+// 用户
+export const SET_USER_INFO = 'SET_USER_INFO'
+export const SET_USER_LOGIN_INFO = 'SET_USER_LOGIN_INFO'
+
+// 轮转
+export const SET_ROTATE_INFO_ARR = 'SET_ROTATE_INFO_ARR'
+export const SET_ROTATE_INFO = 'SET_ROTATE_INFO'
+export const SET_ROTATE_MENU = 'SET_ROTATE_MENU'
