@@ -74,7 +74,7 @@ export default {
   left: 0px;
   width: 100%;
   height: 280px;
-  background: url(../assets/loginImg.png) no-repeat;
+  background: url(../assets/loginImg.jpg) no-repeat;
   background-size: cover;
   background-position: center;
   overflow: hidden;

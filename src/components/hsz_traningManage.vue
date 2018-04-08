@@ -1,37 +1,14 @@
 <template>
   <div id="traningManage">
     <div class="demandlist" v-show="showleftmune">
-      <group label-align="center">
+      <!--group label-align="center">
         <template v-for="(item,index) in demandinfoData">
-          <cell-box><span style="background-color:#ccc;">{{item.name}}</span></cell-box>
-          <template v-for="itemB in demandinfoData[index].demands">
-            <cell-box><span>{{itemB.name}}</span></cell-box>
+          <cell-box :key="index"><span style="background-color:#ccc;">{{item.name}}</span></cell-box>
+          <template v-for="(itemB,indexB) in demandinfoData[index].demands">
+            <div :key="indexB"><span>{{itemB.name}}</span></div>
           </template>
         </template>
-      </group>
-
-
-
-      <!--template v-for="(item,index) in demandinfoData">
-        <group label-align="center">
-          <cell-box><span>{{item.name}}</span></cell-box>
-          <template v-for="itemB in demandinfoData[index].demands">
-            <group class="groupB" label-align="center">
-              <cell-box>{{itemB.name}}</cell-box>
-            </group>
-          </template>
-        </group>
-      </template-->
-      <!--group>
-        <cell-box>{{demandinfoData[0].name}}</cell-box>
-        <template v-for="item in demandinfoData[0].demands">
-            <cell-box>{{item.name}}</cell-box>
-          </template>
-      </group>
-        <cell-box>{{demandinfoData[1].name}}</cell-box>
-        <template v-for="item in demandinfoData[1].demands">
-            <cell-box>{{item.name}}</cell-box>
-          </template-->
+      </group-->
     </div>
   </div>
 </template>
@@ -40,7 +17,6 @@
 import { Group, Cell, CellBox } from 'vux'
 import { getDemandInfo } from '@/http/data'
 import { mapGetters } from 'vuex'
-import { truncate } from 'fs';
 var that
 export default {
   name: '',
@@ -58,20 +34,16 @@ export default {
     return {
       demandinfoData: {},
       name: '',
-      showleftmune: true,
+      showleftmune: true
     }
   },
   created () {
-    that=this;
+    that = this
   },
-  activated(){
-    getDemandInfo(this.userLoginInfo.guid).then(res=>{
-        that.demandinfoData=res.datas
-        console.log(that.demandinfoData);
-      });
-  },
-  methods: {
-
+  activated () {
+    getDemandInfo(this.userLoginInfo.guid).then(res => {
+      that.demandinfoData = res.datas
+    })
   }
 }
 </script>

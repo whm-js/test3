@@ -1,11 +1,12 @@
 <template>
+  <!-- 轮转手册页面 -->
   <div class="handbookmainpage">
     <x-header :left-options="{backText: ''}" style="width: 100%;position: fixed;left: 0px;top: 0px;z-index: 100;">{{rotateInfo.depart_name}}
     </x-header>
     <div style="height:30px;text-align:center;border-bottom: 1px solid #999999;">轮转时间 {{rotateInfo.plan_start}} 至 {{rotateInfo.plan_end}}</div>
     <div style="height:50px;text-align:center;background-color:white;">
       <div @click="showbookpopup = true" style="width:50px;height:50px;float:left;">
-        <img style="width:100%;" src="../assets/menu.png"/>
+        <img style="width:100%;" src="../assets/menu.png" />
       </div>
       <div style="width:calc( 100% - 52px );height:50px;float:right;">
         <p>{{rotateMenu.menuonename}}</p>
@@ -15,10 +16,11 @@
 
     <group gutter="10">
       <swipeout v-for="(item, index) in RotateRecord" :key="`swipeout${index}`">
-        <swipeout-item transition-mode="follow">
+        <swipeout-item transition-mode="follow" style="    border-top: 1px solid#ddd;">
           <div slot="right-menu">
-            <swipeout-button @click.native="onButtonClick('update')" style="background-color:#37acd3;color:white;">修改</swipeout-button>
-            <swipeout-button @click.native="onButtonClick('delete')" type="warn">删除</swipeout-button>
+            <swipeout-button v-if="item.SerialId === null" @click.native="onButtonClick('add', item)" style="background-color:#37acd3;color:white;">录入</swipeout-button>
+            <swipeout-button v-if="item.SerialId !== null" @click.native="onButtonClick('update', item)" style="background-color:#37acd3;color:white;">修改</swipeout-button>
+            <swipeout-button v-if="item.SerialId !== null" @click.native="onButtonClick('delete', item)" type="warn">删除</swipeout-button>
           </div>
           <!-- <div slot="content">fdafdafdsafds</div> -->
           <template slot="content">
@@ -62,10 +64,10 @@
         <div class="menu-tip" v-if="el.demands.length>0" :key="'demandtitle'+index">{{el.name}}</div>
         <div class="menu-tip-no" v-else :key="'demandtitleno'+index"></div>
         <ul :key="'demandnameul'+index">
-          <li v-if="el.demands.length==0" @click="DemandNameClick($event,index,0)" :showDemandName="el.name" :DemandId="el.id" :TableName="el.TableFlag" :class="{active:el.Active=='in active'&&DemandNameindex==0}">
+          <li v-if="el.demands.length==0" @click="DemandNameClick(index,0)" :showDemandName="el.name" :DemandId="el.id" :TableName="el.TableFlag" :class="{active:el.Active=='in active'&&DemandNameindex==0}">
             {{el.name}}
           </li>
-          <li v-else v-for="(el1,index1) in el.demands" :key="'demandname'+index1" @click="DemandNameClick($event,index,index1)" :showDemandName="el.name+'-'+el1.name" :DemandId="el1.id" :class="{active:rotateMenu.menuone===index&&rotateMenu.menutwo===index1}">
+          <li v-else v-for="(el1,index1) in el.demands" :key="'demandname'+index1" @click="DemandNameClick(index,index1)" :showDemandName="el.name+'-'+el1.name" :DemandId="el1.id" :class="{active:rotateMenu.menuone===index&&rotateMenu.menutwo===index1}">
             {{el1.name}}
           </li>
 
@@ -78,7 +80,7 @@
 <script>
 import { XButton, Group, XHeader, XInput, Popup, Cell, Swipeout, SwipeoutItem, SwipeoutButton } from 'vux'
 import { mapGetters, mapActions } from 'vuex'
-import { demandhandbook, getRotateRecord } from '@/http/data'
+import { demandhandbook, getRotateRecord, delRotateRecord } from '@/http/data'
 var that
 export default {
   components: {
@@ -150,21 +152,37 @@ export default {
       }
       // console.log(this.RotateRecord[index].showP)
     },
-    DemandNameClick (el, index, index1) {
-      var menuname = el.target.getAttribute('showDemandName').split('-')
-      this.setRotateMenu({ menuone: index, menuonename: menuname[0], menutwo: index1, menutwoname: menuname[1] })
+    DemandNameClick (index, index1) {
+      this.handbookmenuone = index
+      this.handbookmenutwo = index1
+      this.setRotateMenu({ menuone: index, menuonename: this.handBookData[index].name, menutwo: index1, menutwoname: this.handBookData[index].demands[index1].name })
       getRotateRecord(
         this.userLoginInfo.guid,
         this.userLoginInfo.user.id,
-        this.rotateInfo.depart_id, el.target.getAttribute('DemandId')
+        this.rotateInfo.depart_id,
+        this.handBookData[index].demands[index1].id
       ).then(res => {
-        console.log(res.datas)
+        // console.log(res.datas)
         that.RotateRecord = res.datas.items
         that.showbookpopup = false
       })
     },
-    onButtonClick (type) {
+    onButtonClick (type, item) {
+      switch (type) {
+        case 'add':
 
+          break
+        case 'update':
+
+          break
+        case 'delete':
+          delRotateRecord(this.userLoginInfo.guid, item.SerialId).then(res => {
+            that.$vux.toast.text('删除成功！')
+            console.log(that.handbookmenuone, that.handbookmenutwo)
+            that.DemandNameClick(that.handbookmenuone, that.handbookmenutwo)
+          })
+          break
+      }
     }
   }
 }

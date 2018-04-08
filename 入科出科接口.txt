@@ -1,0 +1,111 @@
+﻿1、获取轮转计划信息接口 /rotate/getRotatePlanInfo
+参数：
+guid
+planStartDate,(计划入科时间，用于入科页面)
+planEndDate,(计划出科时间，出科页面)
+realityEndDate (实际出科时间)
+rotateStatus,（轮转状态） 
+（传1000，返回“未入科”以外的数据）
+（传1001，返回“未入科”，“未申请出科”，“导师未审核”，“导师审核不通过”，“护士长审核不通过”的数据）
+（传1002，返回 已入科但未出科的数据）
+whereDepartmentName,(科室名称精确查询)
+likeDepartmentName,(科室名称模糊查询)
+nurseRealName,护士姓名
+pageIndex,（当前页）
+pageSize（每页显示条数）
+
+
+2、获取带教导师信息接口 /rotate/getNurseTeacher
+参数：
+guid
+departmentId,(科室id)
+planStartDate,
+userId,(学员id)
+
+
+3、批准入科接口 /rotate/setRotateEntry
+参数：
+guid
+departmentId,(科室id)
+userId,(学员userid)
+planStartDate,
+realityStartdate,
+departmentId,
+coachingId,
+coachingName
+
+4、轮转手册接口/rotate/getRotateManual
+参数：
+guid
+departmentId,
+
+
+5、轮转手册-轮转记录接口/rotate/getRotateRecord
+参数：
+guid,
+userId,
+departmentId,
+demandId
+
+
+6、获取出科详情接口/rotate/getExitCourse
+参数：
+guid,
+serialId,(轮转计划的序列id)
+
+7、学员申请出科接口（提交总结）/rotate/submitPersonSummary
+参数：
+guid,
+serialId,(轮转计划的序列id)
+summaryInfo(学员个人总结)
+
+8、导师提交审核接口/rotate/submitTeacherComment
+参数：
+guid,
+serialId,(轮转计划的序列id)
+teacherComment(学员个人总结)
+tutorAduit (导师审核轮转计划培训内容)
+auditResult (导师审核是否通过.  0:否   1:是)
+
+9、护士长审核出科接口/rotate/submitAppraise
+guid,
+serialId,(轮转计划的序列id)
+appraise,(护士长总评)
+nurseLeaderReason(不合格的原因)
+
+10、添加轮转记录接口 /rotate/addRotateRecord
+guid,
+userId,(学员id)(必传)
+demandId,（要求id）(必传)
+departmentId,(科室id)（用于大科、专科科室）
+trainingId (培训id)（/rotate/getRotateRecord 有返回就传）
+trainingContent, （培训内容）
+duration, （学时）
+trainingDate, （培训日期）
+appraise,（评价）
+remark, （）
+speaker,（主讲人）
+
+
+11、更新轮转记录接口 /rotate/setRotateRecord
+guid,
+serialId,(轮转记录的序列id)（必传）
+trainingContent, （培训内容）
+duration, （学时）
+trainingDate, （培训日期）
+appraise,（评价）
+remark, （）
+speaker,（主讲人）
+
+12、删除轮转记录接口 /rotate/delRotateRecord
+guid,
+serialId,(轮转记录的序列id)（必传）
+
+13、导师查看轮转记录接口 /rotate/getRotateRecordForTutor
+guid,
+userId,(学员id)（必传）
+
+
+
+
+

@@ -96,7 +96,7 @@ export default {
       showdepartment: false,
       sex: 0,
       userData: {},
-      professionpopuplist: [['护理','助产']],
+      professionpopuplist: [['护理', '助产']],
       professionpopupvalue: [],
       levelpopuplist: [['N0', 'N1', 'N2', 'N3', 'N4', 'N5']],
       levelpopupvalue: [],

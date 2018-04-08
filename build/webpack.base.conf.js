@@ -34,7 +34,7 @@ const webpackConfig = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json','.less'],
+    extensions: ['.js', '.vue', '.json', '.less'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -95,5 +95,17 @@ const webpackConfig = {
 
 module.exports = vuxLoader.merge(webpackConfig, {
   options: {},
-  plugins: ['vux-ui', 'progress-bar', 'duplicate-style']
+  plugins: [{
+    name: 'vux-ui'
+  },
+  {
+    name: 'progress-bar'
+  },
+  {
+    name: 'duplicate-style'
+  },
+  {
+    name: 'less-theme',
+    path: 'src/styles/theme.less'
+  }]
 })

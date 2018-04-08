@@ -6,6 +6,11 @@ import router from './router'
 import './assets/icon/iconfont.css'
 import { LoadingPlugin, AlertPlugin, ToastPlugin, dateFormat } from 'vux'
 import store from './store/store'
+import BaiduMap from 'vue-baidu-map'
+
+Vue.use(BaiduMap, {
+  ak: 'P2m1mt0RVv3FGzDTCYlCh2CocB8amOGm'
+})
 
 Vue.use(ToastPlugin, {position: 'top'})
 
@@ -14,7 +19,7 @@ FastClick.attach(document.body)
 
 Vue.use(LoadingPlugin)
 Vue.use(AlertPlugin)
-Vue.$dateFormat = Vue.prototype.$dateFormat = dateFormat;
+Vue.$dateFormat = Vue.prototype.$dateFormat = dateFormat
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */

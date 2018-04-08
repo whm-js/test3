@@ -1,11 +1,12 @@
 <template>
+<!-- 轮转计划页面 -->
   <div class="rotate_plan">
     <group gutter="0">
       <cell @click.native="selectPlan(item)" v-if="rotateInfoArr.plans" v-for="(item, index) in rotateInfoArr.plans" :key="`plan${index}`" :title="item.depart_name">
         <span slot="inline-desc">{{item.plan_start}}至{{item.plan_end}}
           <badge :text="`${item.plan_duration}个月`"></badge>
         </span>
-        <span style="color:green;">{{item.status}}</span>
+        <span style="color:green;">{{item.status_code}}</span>
       </cell>
       <cell v-if="rotateInfoArr.plans" v-show="rotateInfoArr.plans.length === 0" :title="'暂无轮转记录,请联系科教科'">
       </cell>

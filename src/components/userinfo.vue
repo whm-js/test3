@@ -79,7 +79,6 @@ export default {
       })
     } else {
       this.userData = this.userInfo
-      
     }
     console.log(this.userData)
   },

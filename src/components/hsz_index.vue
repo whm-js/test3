@@ -121,6 +121,6 @@ export default {
 .hsz_index {
   height: 100%;
 }
-.hsz_index .vux-header{background: rgb(55, 172, 211);}
+/* .hsz_index .vux-header{background: rgb(55, 172, 211);} */
 
 </style>

@@ -4,11 +4,9 @@
       <!-- <a slot="left">Close</a> -->
       <img slot="left" width="35px;" src="../assets/user.png" style="margin-top: -8px;" />
     </x-header>
-
     <keep-alive>
       <router-view/>
     </keep-alive>
-
     <Tabbar v-model="pageindex" style="position: fixed;z-index: 100;">
       <tabbar-item link="/dsexitManage/dsexitInfo">
         <i slot="icon" class="icon iconfont icon-address_icon" />
@@ -25,12 +23,10 @@
     </Tabbar>
   </div>
 </template>
-
 <script>
 import { Tabbar, TabbarItem, XHeader } from 'vux'
 import { mapGetters } from 'vuex'
 export default {
-  name: '',
   components: {
     Tabbar,
     TabbarItem,
@@ -89,14 +85,14 @@ export default {
     }
     // console.log(path)
   },
-  methods: {
-  }
+  methods: {}
 }
-</script>
 
+</script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .index {
   height: 100%;
 }
+
 </style>

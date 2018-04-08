@@ -19,6 +19,7 @@ const userinfoEdit = r => require.ensure([], () => r(require('@/components/useri
 const nurseexit = r => require.ensure([], () => r(require('@/components/nurseexit')))
 const resetpassword = r => require.ensure([], () => r(require('@/components/resetpassword')))
 const handbookmainpage = r => require.ensure([], () => r(require('@/components/handbookmainpage')))
+const handbookdata = r => require.ensure([], () => r(require('@/components/handbookdata')))
 const dsexitManage = r => require.ensure([], () => r(require('@/components/ds_exitManage')))
 const hsznurseentry = r => require.ensure([], () => r(require('@/components/hsz_nurseEntry')))
 const hsznurseexit = r => require.ensure([], () => r(require('@/components/hsz_nurseExit')))
@@ -26,11 +27,19 @@ const hsznurseinfolist = r => require.ensure([], () => r(require('@/components/h
 const hsztraningmanage = r => require.ensure([], () => r(require('@/components/hsz_traningManage')))
 const dsexitInfo = r => require.ensure([], () => r(require('@/components/ds_exitInfo')))
 const dsguideHistory = r => require.ensure([], () => r(require('@/components/ds_guideHistory')))
+const hszapproveentry = r => require.ensure([], () => r(require('@/components/hsz_approveEntry')))
+const dslookExit = r => require.ensure([], () => r(require('@/components/ds_lookExit')))
+const bmap = r => require.ensure([], () => r(require('@/components/bmap')))
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/bmap',
+      name: 'bmap',
+      component: bmap
+    },
     {
       path: '/login',
       name: 'login',
@@ -87,6 +96,11 @@ export default new Router({
       component: handbookmainpage
     },
     {
+      path: '/handbookdata',
+      name: 'handbookdata',
+      component: handbookdata
+    },
+    {
       path: '/dsexitManage',
       name: 'dsexitManage',
       component: dsexitManage,
@@ -97,7 +111,7 @@ export default new Router({
       },
       {
         path: '/dsexitManage/userinfo',
-        name: 'userinfo',
+        name: 'dsuserinfo',
         component: userinfo
       },
       {
@@ -105,6 +119,11 @@ export default new Router({
         name: 'dsguideHistory',
         component: dsguideHistory
       }]
+    },
+    {
+      path: '/dslookExit',
+      name: 'dslookExit',
+      component: dslookExit
     },
     {
       path: '/',
@@ -130,6 +149,11 @@ export default new Router({
         name: 'hsz_traningManage',
         component: hsztraningmanage
       }]
+    },
+    {
+      path: '/hsz_approveEntry',
+      name: 'hsz_approveEntry',
+      component: hszapproveentry
     }
   ]
 })

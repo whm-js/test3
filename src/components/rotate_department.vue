@@ -1,4 +1,5 @@
 <template>
+<!-- 轮转科室页面 -->
   <div class="rotate_department">
 
     <div style="height:110px;padding:10px 10px;border-radius:5px;background-color:white;">
@@ -17,12 +18,12 @@
         </span>
       </cell>
       <cell :title="'带教老师'" :value="rotateInfo.coaching_name"></cell>
-      <cell :title="'轮转状态'" :value="rotateInfo.status"></cell>
+      <cell :title="'轮转状态'" :value="rotateInfo.status_code"></cell>
     </group>
 
     <div style="margin-top:20px;">
-      <x-button @click.native="applyexit" style="width:45%;float:left;background-color:#37acd3;color:white;">出科情况</x-button>
-      <x-button @click.native="showhandbook" style="width:45%;float:right;margin:0;background-color:#37acd3;color:white;">轮转手册</x-button>
+      <x-button @click.native="applyexit" v-show="rotateInfo.status!==0" style="width:45%;float:left;">{{rotateInfo.status===100?'申请出科':'出科情况'}}</x-button>
+      <x-button @click.native="showhandbook" style="width:45%;float:right;margin:0;">轮转手册</x-button>
     </div>
 
     <div>
@@ -33,7 +34,7 @@
               <span slot="inline-desc">{{item.plan_start}}至{{item.plan_end}}
                 <badge :text="`${item.plan_duration}个月`"></badge>
               </span>
-              <span style="color:green;">{{item.status}}</span>
+              <span style="color:green;">{{item.status_code}}</span>
             </cell>
             <cell v-show="rotateInfoArr.plans.length === 0" v-if="rotateInfoArr.plans" :title="'暂无轮转记录,请联系科教科'">
             </cell>
@@ -75,9 +76,11 @@ export default {
       planData: {}
     }
   },
+  // 页面创建时
   created () {
     that = this
   },
+  // 页面激活时
   activated () {
     if (!this.rotateInfoArr.hasOwnProperty('id')) {
       userstatistic(this.userLoginInfo.guid, this.userLoginInfo.user.id).then(res => {
@@ -109,14 +112,15 @@ export default {
       setRotateInfo: 'setRotateInfo'
     }),
     selectdepartment () {
-      if(this.rotateInfoArr.plans.length === 0){
+      if (this.rotateInfoArr.plans.length === 0) {
         this.$vux.toast.text('暂无轮转计划,请联系科教科', 'top')
         return
       }
       this.showdepartment = true
     },
     applyexit () {
-      this.$router.push('/nurseexit')
+      this.$router.push('/bmap')
+      // this.$router.push('/nurseexit')
     },
     showPlanData () {
       for (let i = 0; i < this.rotateInfoArr.plans.length; i++) {

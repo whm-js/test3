@@ -9,13 +9,12 @@ export default {
   name: 'nurseexit',
   data () {
     return {
-      msg:'出科管理'
+      msg: '出科管理'
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
+<style scoped>
+.hsz_nurseExit{height: 100%;}
 </style>

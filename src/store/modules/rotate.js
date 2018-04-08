@@ -3,7 +3,8 @@ import * as types from '../types'
 const state = {
   rotateInfoArr: JSON.parse(localStorage.getItem('rotateInfoArr')) || {},
   rotateInfo: JSON.parse(localStorage.getItem('rotateInfo')) || {},
-  rotateMenu: JSON.parse(localStorage.getItem('rotateMenu')) || { menuone: 0, menuonename: '', menutwo: 0, menutwoname: '' }
+  rotateMenu: JSON.parse(localStorage.getItem('rotateMenu')) || { menuone: 0, menuonename: '', menutwo: 0, menutwoname: '' },
+  rotateRecord: JSON.parse(localStorage.getItem('rotateInfo')) || {}
 }
 
 const actions = {
@@ -23,6 +24,10 @@ const actions = {
     localStorage.setItem('rotateMenu', JSON.stringify(res))
     commit(types.SET_ROTATE_MENU, res)
   },
+  setRotateRecord ({ commit }, res) {
+    localStorage.setItem('rotateRecord', JSON.stringify(res))
+    commit(types.SET_ROTATE_RECORD, res)
+  },
   removeRotateInfoArr ({ commit }) {
     localStorage.removeItem('rotateInfoArr')
     localStorage.removeItem('rotateInfo')
@@ -36,7 +41,8 @@ const actions = {
 const getters = {
   rotateInfoArr: state => state.rotateInfoArr,
   rotateInfo: state => state.rotateInfo,
-  rotateMenu: state => state.rotateMenu
+  rotateMenu: state => state.rotateMenu,
+  rotateRecord: state => state.rotateRecord
 }
 
 const mutations = {
@@ -48,6 +54,9 @@ const mutations = {
   },
   [types.SET_ROTATE_MENU] (state, res) {
     state.rotateMenu = res
+  },
+  [types.SET_ROTATE_RECORD] (state, res) {
+    state.rotateRecord = res
   }
 }
 
