@@ -4,10 +4,8 @@ import Vue from 'vue'
 import router from '@/router'
 import store from '../store/store'
 
-var baseUrl = 'http://101.37.24.216:3009/'
-if (location.hostname === 'localhost') {
-  baseUrl = 'http://118.178.92.150:3101/'
-}
+var baseUrl = 'location'
+
 
 axios.defaults.timeout = 5000
 
